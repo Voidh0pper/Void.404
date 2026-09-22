@@ -1,0 +1,296 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>404 | void</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #020204;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Courier New", monospace;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at center,
+        rgba(90, 0, 130, 0.15),
+        transparent 45%),
+        #020204;
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.025) 0px,
+        rgba(255,255,255,0.025) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.5;
+    animation: float 8s linear infinite;
+}
+
+.p1 { left: 10%; top: 80%; animation-delay: 0s; }
+.p2 { left: 25%; top: 60%; animation-delay: 2s; }
+.p3 { left: 40%; top: 90%; animation-delay: 4s; }
+.p4 { left: 60%; top: 70%; animation-delay: 1s; }
+.p5 { left: 75%; top: 85%; animation-delay: 3s; }
+.p6 { left: 90%; top: 55%; animation-delay: 5s; }
+
+@keyframes float {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.6;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    to {
+        transform: translateY(-700px);
+        opacity: 0;
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 5;
+
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.error {
+    position: relative;
+
+    font-size: clamp(100px, 18vw, 240px);
+    font-weight: 900;
+    letter-spacing: 15px;
+
+    text-shadow:
+        3px 0 #8a00ff,
+        -3px 0 #00ffff,
+        0 0 25px rgba(140, 0, 255, 0.5);
+
+    animation:
+        glitch 2s infinite,
+        flicker 4s infinite;
+}
+
+.error::before,
+.error::after {
+    content: "404";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.error::before {
+    color: #ff00ff;
+    transform: translate(-3px, 0);
+    clip-path: inset(0 0 65% 0);
+    animation: glitchTop 1.5s infinite linear alternate-reverse;
+}
+
+.error::after {
+    color: #00ffff;
+    transform: translate(3px, 0);
+    clip-path: inset(65% 0 0 0);
+    animation: glitchBottom 1.2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+    0%, 90%, 100% {
+        transform: translate(0);
+    }
+
+    92% {
+        transform: translate(-5px, 2px);
+    }
+
+    94% {
+        transform: translate(5px, -2px);
+    }
+
+    96% {
+        transform: translate(-2px, 1px);
+    }
+}
+
+@keyframes glitchTop {
+    0% { clip-path: inset(0 0 80% 0); }
+    50% { clip-path: inset(10% 0 55% 0); }
+    100% { clip-path: inset(0 0 70% 0); }
+}
+
+@keyframes glitchBottom {
+    0% { clip-path: inset(70% 0 0 0); }
+    50% { clip-path: inset(55% 0 10% 0); }
+    100% { clip-path: inset(80% 0 0 0); }
+}
+
+.name {
+    margin-top: -15px;
+
+    font-size: clamp(20px, 4vw, 42px);
+    letter-spacing: 12px;
+    font-weight: bold;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 10px #8a00ff,
+        0 0 25px #8a00ff;
+
+    animation: nameFlicker 3s infinite;
+}
+
+@keyframes nameFlicker {
+    0%, 95%, 100% {
+        opacity: 1;
+    }
+
+    96% {
+        opacity: 0.2;
+    }
+
+    97% {
+        opacity: 0.8;
+    }
+
+    98% {
+        opacity: 0.3;
+    }
+}
+
+.message {
+    margin-top: 25px;
+
+    color: #777;
+    font-size: 14px;
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+}
+
+.home {
+    margin-top: 40px;
+
+    padding: 14px 32px;
+
+    color: white;
+    text-decoration: none;
+
+    border: 1px solid #8a00ff;
+
+    letter-spacing: 4px;
+    font-size: 13px;
+
+    background: rgba(100, 0, 150, 0.08);
+
+    box-shadow:
+        0 0 10px rgba(138, 0, 255, 0.3),
+        inset 0 0 10px rgba(138, 0, 255, 0.08);
+
+    transition: 0.3s;
+}
+
+.home:hover {
+    background: #8a00ff;
+    color: #000;
+
+    box-shadow:
+        0 0 20px #8a00ff,
+        0 0 50px rgba(138, 0, 255, 0.5);
+
+    transform: scale(1.05);
+}
+
+.footer {
+    position: absolute;
+    bottom: 25px;
+
+    font-size: 10px;
+    color: #444;
+
+    letter-spacing: 3px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+    <div class="particle p6"></div>
+
+</div>
+
+<div class="container">
+
+    <div class="error">404</div>
+
+    <div class="name">
+        vOID
+    </div>
+
+<div class="message">
+    The page you are looking for has vanished into the void.
+</div>
+
+<a class="home" href="/">
+    RETURN HOME
+</a>
+
+<a class="home" href="https://limbo.net/@Voidhopper">
+    VIEW SOURCE
+</a>
+
+<div class="footer">
+    CONNECTION LOST // VOID SYSTEM
+</div>
